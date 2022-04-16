@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    database: raw
+    schema: jaffle_shop
+    tables:
+      - name: customers
+        description: Raw customer data.
+        columns:
+          - name: id
+            descripion: Primary key for customers.
+            tests:
+              - unique
+              - not_null
+          - name: first_name
+            decription: The customer's first name.
+            tests:
+              - not_null
+          - name: last_name
+            decription: The customer's last name.
+            tests:
+              - not_null
+      - name: orders
+        description: Raw order data
+        columns:
+          - name: id
+            description: Primary key for orders.
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                  to: ref('stg_customers')
+                  field: customer_id
+        loaded_at_field: _etl_loaded_at
+        freshness:
+          warn_after: {count: 12, period: hour}
+          error_after: {count: 24, period: hour}

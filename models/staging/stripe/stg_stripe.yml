@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: stg_payments
+    description: Payments received against an order.
+    columns:
+      - name: payment_id
+        description: The paymentt identifier.
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: The order identifier.
+        tests:
+          - not_null
+      - name: payment_method
+        description: "{{ doc('payment_methods') }}"
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - credit_card
+                - coupon
+                - bank_transfer
+                - gift_card
+      - name: status
+        description: The status of the received payment.
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - success
+                - fail
+      - name: amount
+        description: The payment amount in cents.
+        tests:
+          - not_null
+      - name: created_at
+        description: The date on which this payment was received.
+        tests:
+          - not_null
+  - name: stg_order_payments
+    description: Sum of successful payments against an order.
+    columns:
+      - name: order_id
+        description: The order identifier.
+        tests:
+          - not_null
+          - unique
+      - name: amount
+        description: The sum of successful payments against this order.
+        tests:
+          - not_null

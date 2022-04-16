@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Customer information.
+    columns:
+      - name: customer_id
+        description: The customer identifier.
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: The customer's first name.
+        tests:
+          - not_null
+      - name: last_name
+        description: The customer's last name.
+        tests:
+          - not_null
+  - name: stg_orders
+    description: Orders placed by a customer.
+    columns:
+      - name: order_id
+        description: The order identifier.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: The customer identifier.
+        tests:
+          - not_null
+      - name: order_date
+        description: The date on which the order was placed.
+        tests:
+          - not_null
+      - name: status
+        description: "{{ doc('order_statuses') }}"
+        tests:
+          - accepted_values:
+              values:
+                - returned
+                - completed
+                - return_pending
+                - shipped
+                - placed
