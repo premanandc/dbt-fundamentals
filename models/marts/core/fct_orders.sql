@@ -3,7 +3,7 @@ with orders as  (
 ),
 
 order_payments as (
-    select * from {{ ref('stg_order_payments') }}
+    select * from {{ ref('stg_successful_payments') }}
 ),
 
 final as (

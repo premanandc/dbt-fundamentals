@@ -22,7 +22,7 @@ sources:
             tests:
               - not_null
       - name: orders
-        description: Raw order data
+        description: Raw order data.
         columns:
           - name: id
             description: Primary key for orders.
@@ -32,6 +32,27 @@ sources:
               - relationships:
                   to: ref('stg_customers')
                   field: customer_id
+          - name: user_id
+            description: The customer identifier.
+          - name: status
+            description: The status of the order.
+            tests:
+              - not_null
+              - accepted_values:
+                  values:
+                    - returned
+                    - completed
+                    - return_pending
+                    - shipped
+                    - placed
+          - name: order_date
+            description: The date on which the order was placed.
+            tests:
+              - not_null
+          - name: _etl_loaded_at
+            description: The date and time on which this row was refreshed.
+            tests:
+              - not_null
         loaded_at_field: _etl_loaded_at
         freshness:
           warn_after: {count: 12, period: hour}
