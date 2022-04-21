@@ -59,7 +59,7 @@ dbt docs serve
 # you can assert these like below
 dbt source freshness
 ```
-Look at `src_stripe.yml` for an example.
+Look at `src_stripe.yml` for an example. Relevant snippet here: 
 ```yml
         loaded_at_field: _batched_at
         freshness:
@@ -69,7 +69,7 @@ Look at `src_stripe.yml` for an example.
 ## Next steps
 * Understand what snapshots do and how they work
 * Understand how seed data works
-* Understand how _packages_ work. For example, how dbt works with [https://greatexpectations.io/](great-expectations) to allow richer assertions.
+* Understand how _packages_ work. For example, how dbt works with [great-expectations](https://greatexpectations.io/) to allow richer assertions.
 * Understand how to integrate ingestion into the mix using something like [singer](https://www.singer.io/), [fivetran](https://www.fivetran.com/), etc.
 * Understand how to make dbt work with pipeline tools like [airflow](https://airflow.apache.org/), [dagster](https://dagster.io/), etc.
 
